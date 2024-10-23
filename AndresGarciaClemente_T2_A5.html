@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // Función para manejar el envío del formulario
+        function mostrarDatos(event) {
+            event.preventDefault(); // Evita que el formulario se envíe y la página se recargue
+
+            // Obtener los valores del formulario
+            var nombre = document.getElementById("nombre").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var pais = document.getElementById("pais").value;
+            var fecha = document.getElementById("fecha").value;
+            var color = document.getElementById("color").value;
+            var edad = document.getElementById("edad").value;
+            var genero = document.querySelector('input[name="genero"]:checked').value;
+            var terminos = document.getElementById("terminos").checked;
+
+            // Mostrar los datos en pantalla
+            var resultado = `
+                <h3>Datos Ingresados:</h3>
+                <p><strong>Nombre:</strong> ${nombre}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Contraseña:</strong> ${password}</p>
+                <p><strong>Género:</strong> ${genero}</p>
+                <p><strong>País:</strong> ${pais}</p>
+                <p><strong>Fecha de nacimiento:</strong> ${fecha}</p>
+                <p><strong>Color:</strong> <span style="background-color: ${color}; padding: 5px; color: white;">${color}</span></p>
+                <p><strong>Edad:</strong> ${edad}</p>
+                <p><strong>Términos aceptados:</strong> ${terminos ? "Sí" : "No"}</p>
+            `;
+
+            // Insertar los datos en el div de resultado
+            document.getElementById("resultado").innerHTML = resultado;
+        }
+    </script>
+</head>
+<body>
+    <h1>Formulario de Resgistro</h1>
+    <form onsubmit="mostrarDatos(event)">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required minlength="3" maxlength="50" placeholder="Escribe tu nombre completo"><br><br>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required minlength="6" maxlength="20" placeholder="ejemplo@email.com"><br><br>
+
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password" required minlength="6" maxlength="20" placeholder="Contraseña de 6 a 20 caracteres"><br><br>
+
+        <label for="edad">Edad</label>
+        <input type="number" id="edad" required min="1" max="120" placeholder="Introduzca la edad"><br><br>
+
+        <label for="pais">País</label>
+        <select id="pais">
+            <option value="031">España</option>
+            <option value="032">Italia</option>
+            <option value="033">Portugal</option>
+        </select><br><br>
+
+        <label for="fecha">Fecha de nacimiento</label>
+        <input type="date" id="fecha" required><br><br>
+
+        <label>Color favorito</label>
+        <input type="color" id="color"><br><br>
+
+        <label>Género</label><br>
+        <input type="radio" id="masculino" name="genero" value="masculino">
+        <label for="masculino">Masculino</label><br>
+        <input type="radio" id="femenino" name="genero" value="femenino">
+        <label for="femenino">Femenino</label><br><br>
+
+        <label>Acepto los términos y condiciones</label>
+        <input type="checkbox" id="terminos"><br><br>
+
+        <input type="submit" value="Registrarse">
+    </form>
+     <!-- Div donde se mostrarán los datos ingresados -->
+     <div id="resultado"></div>
+</body>
+</html>
